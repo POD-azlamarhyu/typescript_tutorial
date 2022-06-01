@@ -2,8 +2,16 @@ function func() : void{
     console.log("type script!");
 }
 
-const n : number = 10;
+const fun = (a:number , b:number):number =>{
+    return a*b;
+}
 
-for(let i = 0;i < n/2;i++){
-    func();
+const isPrime = (n:number):boolean => {
+    return false;
+}
+
+
+
+const isUser = (a: string):boolean[] | null =>{
+    return [true,true,false];
 }
