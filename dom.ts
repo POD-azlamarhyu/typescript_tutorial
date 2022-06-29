@@ -33,6 +33,12 @@ interface Location{
     city: string;
 }
 
+interface Weather{
+    weather: string;
+    wind: string;
+    wave: string;
+}
+
 
 const randomColor = ():string =>{
     let i:number = Math.floor(Math.random()*(colorAry.length+1));
@@ -47,7 +53,7 @@ const displayJsonData = async (resJson:any):Promise<void> => {
     const param2:HTMLParagraphElement = document.createElement("p");
     const param3:HTMLParagraphElement = document.createElement("p");
     const loc:Location = resJson.location;
-    const weather:any = resJson.forecasts[0].detail;
+    const weather:Weather = resJson.forecasts[0].detail;
     param1.textContent = `場所 : ${loc.area+" " + loc.city+" "+loc.district}`;
     js_div_3.appendChild(param1);
     param2.textContent = `天気 : ${weather.weather}`;
