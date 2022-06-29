@@ -17,15 +17,23 @@ console.log(js_p_2);
 const js_label:NodeListOf<HTMLLabelElement> = document.querySelectorAll("label");
 
 const js_btn_1:HTMLElement  | null= document.getElementById("js-btn-1");
+const btn2:HTMLElement | null = document.getElementById("js-btn-2");
 
 const js_input_1:HTMLElement  | null= document.getElementById("js-input-1");
-
+const colorAry:string[] = ["#FFD489","#FFB64D","#FFE543","#C3FF43","#82FF43","#43FFAA","#5FFAFF","#5FBDFF","#5F6DFF"];
 const url:string = "https://weather.tsukumijima.net/api/forecast/city/";
-
+const bg:HTMLElement | null = document.getElementById("js-submit-2");
 const js_div_3:HTMLElement | null = document.getElementById("js-div-8");
 const js_btn_4:HTMLElement | null = document.getElementById("js-btn-4");
+const randomColor = ():string =>{
+    let i:number = Math.floor(Math.random()*(colorAry.length+1));
+    return colorAry[i];
+}
+const changeBgCol = ():void => {
+    bg.style.backgroundColor = randomColor();
+}
 
-const displayJsonData = (resJson:any) => {
+const displayJsonData = async (resJson:any):Promise<void> => {
     const param1:HTMLParagraphElement = document.createElement("p");
     const param2:HTMLParagraphElement = document.createElement("p");
     const loc:any = resJson.location;
@@ -44,10 +52,10 @@ const displayBody = async ():Promise<void> => {
         const resJson:any =  await res.json();
 
         console.log(resJson);
-        displayJsonData(resJson);
+        await displayJsonData(resJson);
     }catch(err:unknown){
         console.error(err);
     }
 }
-
-js_btn_4.addEventListener("click",displayBody)
+btn2.addEventListener("click",changeBgCol);
+js_btn_4.addEventListener("click",displayBody);

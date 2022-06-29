@@ -45,27 +45,41 @@ var js_p_2 = document.getElementById("js-p-2");
 console.log(js_p_2);
 var js_label = document.querySelectorAll("label");
 var js_btn_1 = document.getElementById("js-btn-1");
+var btn2 = document.getElementById("js-btn-2");
 var js_input_1 = document.getElementById("js-input-1");
+var colorAry = ["#FFD489", "#FFB64D", "#FFE543", "#C3FF43", "#82FF43", "#43FFAA", "#5FFAFF", "#5FBDFF", "#5F6DFF"];
 var url = "https://weather.tsukumijima.net/api/forecast/city/";
+var bg = document.getElementById("js-submit-2");
 var js_div_3 = document.getElementById("js-div-8");
 var js_btn_4 = document.getElementById("js-btn-4");
-var displayJsonData = function (resJson) {
-    var param1 = document.createElement("p");
-    var param2 = document.createElement("p");
-    var loc = resJson.location;
-    var weather = resJson.forecasts[0].detail;
-    param1.textContent = "\u5834\u6240 : " + (loc.area + " " + loc.city + " " + loc.district);
-    js_div_3.appendChild(param1);
-    param2.textContent = "\u5929\u6C17 : " + weather.weather;
-    js_div_3.appendChild(param2);
-    console.log(resJson.location);
+var randomColor = function () {
+    var i = Math.floor(Math.random() * (colorAry.length + 1));
+    return colorAry[i];
 };
+var changeBgCol = function () {
+    bg.style.backgroundColor = randomColor();
+};
+var displayJsonData = function (resJson) { return __awaiter(_this, void 0, void 0, function () {
+    var param1, param2, loc, weather;
+    return __generator(this, function (_a) {
+        param1 = document.createElement("p");
+        param2 = document.createElement("p");
+        loc = resJson.location;
+        weather = resJson.forecasts[0].detail;
+        param1.textContent = "\u5834\u6240 : " + (loc.area + " " + loc.city + " " + loc.district);
+        js_div_3.appendChild(param1);
+        param2.textContent = "\u5929\u6C17 : " + weather.weather;
+        js_div_3.appendChild(param2);
+        console.log(resJson.location);
+        return [2 /*return*/];
+    });
+}); };
 var displayBody = function () { return __awaiter(_this, void 0, void 0, function () {
     var cityId, res, resJson, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 3, , 4]);
+                _a.trys.push([0, 4, , 5]);
                 cityId = "017010";
                 return [4 /*yield*/, fetch("" + url + cityId)];
             case 1:
@@ -74,14 +88,17 @@ var displayBody = function () { return __awaiter(_this, void 0, void 0, function
             case 2:
                 resJson = _a.sent();
                 console.log(resJson);
-                displayJsonData(resJson);
-                return [3 /*break*/, 4];
+                return [4 /*yield*/, displayJsonData(resJson)];
             case 3:
+                _a.sent();
+                return [3 /*break*/, 5];
+            case 4:
                 err_1 = _a.sent();
                 console.error(err_1);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); };
+btn2.addEventListener("click", changeBgCol);
 js_btn_4.addEventListener("click", displayBody);
