@@ -25,6 +25,15 @@ const url:string = "https://weather.tsukumijima.net/api/forecast/city/";
 const bg:HTMLElement | null = document.getElementById("js-submit-2");
 const js_div_3:HTMLElement | null = document.getElementById("js-div-8");
 const js_btn_4:HTMLElement | null = document.getElementById("js-btn-4");
+
+interface Location{
+    area: string;
+    prefecture: string;
+    district: string;
+    city: string;
+}
+
+
 const randomColor = ():string =>{
     let i:number = Math.floor(Math.random()*(colorAry.length+1));
     return colorAry[i];
@@ -36,13 +45,17 @@ const changeBgCol = ():void => {
 const displayJsonData = async (resJson:any):Promise<void> => {
     const param1:HTMLParagraphElement = document.createElement("p");
     const param2:HTMLParagraphElement = document.createElement("p");
-    const loc:any = resJson.location;
+    const param3:HTMLParagraphElement = document.createElement("p");
+    const loc:Location = resJson.location;
     const weather:any = resJson.forecasts[0].detail;
     param1.textContent = `場所 : ${loc.area+" " + loc.city+" "+loc.district}`;
     js_div_3.appendChild(param1);
     param2.textContent = `天気 : ${weather.weather}`;
     js_div_3.appendChild(param2);
-    console.log(resJson.location);
+    param3.textContent = `風 : ${weather.wind}`;
+    js_div_3.appendChild(param3);
+    console.log(loc);
+    console.log(weather);
 }
 
 const displayBody = async ():Promise<void> => {

@@ -60,17 +60,21 @@ var changeBgCol = function () {
     bg.style.backgroundColor = randomColor();
 };
 var displayJsonData = function (resJson) { return __awaiter(_this, void 0, void 0, function () {
-    var param1, param2, loc, weather;
+    var param1, param2, param3, loc, weather;
     return __generator(this, function (_a) {
         param1 = document.createElement("p");
         param2 = document.createElement("p");
+        param3 = document.createElement("p");
         loc = resJson.location;
         weather = resJson.forecasts[0].detail;
         param1.textContent = "\u5834\u6240 : " + (loc.area + " " + loc.city + " " + loc.district);
         js_div_3.appendChild(param1);
         param2.textContent = "\u5929\u6C17 : " + weather.weather;
         js_div_3.appendChild(param2);
-        console.log(resJson.location);
+        param3.textContent = "\u98A8 : " + weather.wind;
+        js_div_3.appendChild(param3);
+        console.log(loc);
+        console.log(weather);
         return [2 /*return*/];
     });
 }); };
